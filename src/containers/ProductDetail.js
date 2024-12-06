@@ -13,16 +13,16 @@ const ProductDetail = () => {
   const { image, title, price, category, description } = product;
   const dispatch = useDispatch();
   console.log(product);
-  const fetchProduct = async () => {
+  const fetchProduct = async (id) => {
     const response = await axios
-      .get(`https://fakestoreapi.com/products/${productId}`)
+      .get(`https://fakestoreapi.com/products/${id}`)
       .catch((err) => {
         console.log("Err", err);
       });
     dispatch(selectedProduct(response.data));
   };
   useEffect(() => {
-    if (productId && productId !== "") fetchProduct();
+    if (productId && productId !== "") fetchProduct(productId);
     return () => {
       dispatch(removeSelectedProduct());
     };
